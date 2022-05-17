@@ -5,7 +5,8 @@
   "type": "module",
   "main": "index.js",
   "scripts": {
-    "test": "echo \"Error: no test specified\" && exit 1"
+    "test": "echo \"Error: no test specified\" && exit 1",
+    "start": "nodemon.cmd app.js"
   },
   "repository": {
     "type": "git",
@@ -19,10 +20,12 @@
   },
   "homepage": "https://github.com/SePe19/Node.js-Exam-K-OS#readme",
   "dependencies": {
+    "bcrypt": "^5.0.1",
     "express": "^4.18.1",
     "mongoose": "^6.3.3"
   },
   "devDependencies": {
+    "dotenv": "^16.0.1",
     "install": "^0.13.0",
     "nodemon": "^2.0.16",
     "npm": "^8.10.0"
