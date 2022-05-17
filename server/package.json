@@ -1,0 +1,30 @@
+{
+  "name": "node.js_exam_k-os",
+  "version": "1.0.0",
+  "description": "",
+  "type": "module",
+  "main": "index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/SePe19/Node.js-Exam-K-OS.git"
+  },
+  "keywords": [],
+  "author": "",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/SePe19/Node.js-Exam-K-OS/issues"
+  },
+  "homepage": "https://github.com/SePe19/Node.js-Exam-K-OS#readme",
+  "dependencies": {
+    "express": "^4.18.1",
+    "mongoose": "^6.3.3"
+  },
+  "devDependencies": {
+    "install": "^0.13.0",
+    "nodemon": "^2.0.16",
+    "npm": "^8.10.0"
+  }
+}
