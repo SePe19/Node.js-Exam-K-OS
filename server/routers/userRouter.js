@@ -1,22 +1,84 @@
 import bcrypt from "bcrypt";
 import { Router } from "express";
 import User from "../database/createSchema.js";
+import jwt from "jsonwebtoken";
+
 
 const router = Router();
 
-router.post("/signup", async (req, res) => {
-    const body = req.body;
+router.post("/signup", (req, res) => {
+  User.find({ username: req.body.username})
+      .exec()
+      .then(user => {
+          if (user.length >= 1) {
+              return res.status(409).json({
+                  message: "Username exists"
+              });
+          } else {
+              bcrypt.hash(req.body.password, 10, (err, hash) => {
+                  if (err) {
+                      return res.status(500).json({
+                          error: err
+                      });
+                  } else {
+                      const user = new User({
+                          username: req.body.username,
+                          password: hash
+                      });
+                      user
+                          .save()
+                          .then(result => {
+                              res.redirect("/auth/login")
+                          })
+                          .catch(err => {
+                              console.log(err);
+                              res.status(500).json({
+                                  error: err
+                              });
+                          });
+                  }
+              });
+          }
+      });
+});
 
-    if (!(body.username && body.password)) {
-      return res.status(400).send({ error: "Data not formatted properly" });
-    }
-
-    const user = new User(body);
-
-    const salt = await bcrypt.genSalt(10);
-
-    user.password = await bcrypt.hash(user.password, salt);
-    user.save().then((doc) => res.status(201).send(doc));
+router.post("/login", (req, res, next) => {
+  User.find({ username: req.body.username })
+      .exec()
+      .then(user => {
+          if (user.length < 1) {
+              return res.status(401).json({
+                  message: "Username not found. Unable to Login"
+              });
+          }
+          
+          bcrypt.compare(req.body.password, user[0].password, (err, result) => {
+              if (err) {
+                  return res.status(401).json({
+                      message: "Incorrect Password"
+                  });
+              }
+              if (result) {
+                  const token = jwt.sign(
+                      {
+                          username: user[0].username,
+                          _id: user[0]._id
+                      },
+                      process.env.JWT_KEY,
+                      {
+                          expiresIn: "1h"
+                      }
+                  );
+                  res.status(200).json({ message: "Login Success"})
+              }
+          });
+      })
+      .catch(err => {
+          console.log(err);
+          res.status(500).json({
+              error: err
+          });
+      });
 });
 
 export default router;

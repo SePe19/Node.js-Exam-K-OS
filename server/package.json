@@ -21,11 +21,12 @@
   "homepage": "https://github.com/SePe19/Node.js-Exam-K-OS#readme",
   "dependencies": {
     "bcrypt": "^5.0.1",
+    "dotenv": "^16.0.1",
     "express": "^4.18.1",
+    "jsonwebtoken": "^8.5.1",
     "mongoose": "^6.3.3"
   },
   "devDependencies": {
-    "dotenv": "^16.0.1",
     "install": "^0.13.0",
     "nodemon": "^2.0.16",
     "npm": "^8.10.0"
