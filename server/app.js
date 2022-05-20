@@ -26,6 +26,10 @@ io.on("connect", (socket) => {
         console.log("User with id: ", socket.id, " joined the chatroom", data);
     });
 
+    socket.on("send_message", (data) => {
+        socket.to(data.chatroom).emit("receive_message",data)
+    });
+
     socket.on("disconnect", () => {
         console.log("User Disconnected: ", socket.id);
     });

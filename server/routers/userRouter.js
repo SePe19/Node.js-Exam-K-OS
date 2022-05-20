@@ -1,6 +1,6 @@
 import bcrypt from "bcrypt";
 import { Router } from "express";
-import User from "../database/createSchema.js";
+import User from "../database/createUserSchema.js";
 import jwt from "jsonwebtoken";
 
 
