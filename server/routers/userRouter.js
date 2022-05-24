@@ -6,7 +6,7 @@ import jwt from "jsonwebtoken";
 
 const router = Router();
 
-router.post("/signup", (req, res) => {
+router.post("/register", (req, res) => {
   User.find({ username: req.body.username})
       .exec()
       .then(user => {
