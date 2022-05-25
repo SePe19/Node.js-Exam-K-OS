@@ -14,7 +14,8 @@ import { Server } from "socket.io";
 const io = new Server(server, {
     cors: {
         origin: "http://localhost:3000",
-        methods: ["GET", "POST", "PUT", "DELETE"]
+        methods: ["GET", "POST", "PUT", "DELETE"],
+        
     }
 });
 
@@ -43,10 +44,14 @@ mongoose.connect("mongodb://localhost:27017/chatland", {
     .then((_) => console.log("Connected to DB"))
     .catch((err) => console.error("error", err));
 
-
 import userRouter from "./routers/userRouter.js";
 app.use("/auth", userRouter);
 
+import protect from "./middleware/authMiddleware.js"
+app.post("/", protect);
+
+import cookieParser from "cookie-parser"
+app.use(cookieParser());
 
 server.listen(8080, () => {
     console.log("Server Running")

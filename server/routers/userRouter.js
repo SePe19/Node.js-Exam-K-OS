@@ -4,15 +4,18 @@ import User from "../database/createUserSchema.js";
 import jwt from "jsonwebtoken";
 
 
+
 const router = Router();
+
 
 router.post("/register", (req, res) => {
     User.find({ username: req.body.username })
         .exec()
         .then(user => {
             if (user.length >= 1) {
-                return res.status(409).json({
-                    message: "Username exists"
+                return res.json({
+                    status: false,
+                    message: "Username already exists"
                 });
             } else {
                 bcrypt.hash(req.body.password, 10, (err, hash) => {
@@ -23,12 +26,14 @@ router.post("/register", (req, res) => {
                     } else {
                         const user = new User({
                             username: req.body.username,
-                            password: hash
+                            password: hash,
+                           
+
                         });
                         user
                             .save()
                             .then(result => {
-                                res.status(200).json ({message: "User Registered"})
+                                res.json ({message: "User Registered",status: true})
                             })
                             .catch(err => {
                                 console.log(err);
@@ -42,12 +47,13 @@ router.post("/register", (req, res) => {
         });
 });
 
-router.post("/login", (req, res, next) => {
+router.post("/login",  (req, res, next) => {
     User.find({ username: req.body.username })
         .exec()
         .then(user => {
             if (user.length < 1) {
-                return res.status(401).json({
+                return res.json({
+                    status: false,
                     message: "Username not found. Unable to Login"
                 });
             }
@@ -62,12 +68,21 @@ router.post("/login", (req, res, next) => {
                         {
                             expiresIn: "1h"
                         }
+                        
                     );
-                    res.status(200).json({ message: "Login Success" })
+                        console.log("this is our token", token)
+                        
+                        res.cookie("jwt",token,{
+                            httpOnly: true,
+                            
+                    
+                        })
+                        .json({ message: "Login Success", status: true })
 
                 } else {
-                    return res.status(401).json({
-                        message: "Incorrect Password"
+                    return res.json({
+                        message: "Incorrect Password",
+                        status: false
                     });
                 }
             });

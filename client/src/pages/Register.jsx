@@ -55,11 +55,11 @@ function Register() {
             });
 
             if (data.status === false) {
-                console.log(data.msg, " This is data status if it fails")
+                toast.error(data.message, toastOptions);
             }
 
             if (data.status === true) {
-                console.log(data.msg, " This is data status if success")
+                               
 
                 navigate("/chatroom") 
             }
@@ -77,7 +77,7 @@ function Register() {
                     <input type="text" placeholder="Username" name="username" onChange={(e) => handleChange(e)} />
                     <input type="password" placeholder="Password" name="password" onChange={(e) => handleChange(e)} />
                     <button type='submit'> Register User </button>
-                    {/* <span> Already a user? <Link to="/login"> Login </Link></span> */}
+                    <span> Already a user? <Link to="/login"> Login </Link></span> 
                 </form>
             </FormContainer>
             <ToastContainer />
