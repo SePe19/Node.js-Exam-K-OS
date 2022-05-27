@@ -5,6 +5,7 @@ import { ToastContainer, toast } from "react-toastify";
 import axios from "axios"
 import { loginRoute } from '../utilities/APIRoutes';
 
+
 function Login() {
     
     const navigate = useNavigate();
@@ -48,15 +49,18 @@ function Login() {
             const { username, password } = values;
             const { data } = await axios.post(loginRoute, {
                 username,
-                password
-            });
+                password,
+            }, {withCredentials: true});
 
             if (data.status === false) {
                toast.error(data.message, toastOptions )
             }
 
             if (data.status === true) {
-                navigate("/") 
+                navigate("/");
+                console.log("Print out data.token: ", data.token);
+                console.log("This ios userRoute response: ", data);
+                console.log("Print out user in data.token: ", data.user);
             }
             
         }

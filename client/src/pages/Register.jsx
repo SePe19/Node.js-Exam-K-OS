@@ -61,7 +61,7 @@ function Register() {
             if (data.status === true) {
                                
 
-                navigate("/chatroom") 
+                navigate("/login") 
             }
             
         }

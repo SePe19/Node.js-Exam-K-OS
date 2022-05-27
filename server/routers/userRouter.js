@@ -8,6 +8,9 @@ import jwt from "jsonwebtoken";
 const router = Router();
 
 
+const maxAge = 3*24*60*60;
+
+
 router.post("/register", (req, res) => {
     User.find({ username: req.body.username })
         .exec()
@@ -59,26 +62,22 @@ router.post("/login",  (req, res, next) => {
             }
             bcrypt.compare(req.body.password, user[0].password, (error, result) => {
                 if (result) {
-                    const token = jwt.sign(
-                        {
-                            username: user[0].username,
-                            _id: user[0]._id
-                        },
-                        process.env.JWT_KEY,
-                        {
-                            expiresIn: "1h"
-                        }
-                        
-                    );
-                        console.log("this is our token", token)
-                        
-                        res.cookie("jwt",token,{
-                            httpOnly: true,
-                            
                     
-                        })
-                        .json({ message: "Login Success", status: true })
-
+                    const token = jwt.sign({
+                        user: user,
+                    }, 
+                        process.env.JWT_KEY,
+                    {
+                        expiresIn: "10s",
+                    }
+                    );
+                
+                    console.log("Our JWT Token: ", token)
+                    console.log("Our user data ", user)
+                        
+                    res.cookie("jwt", token, { httpOnly: false, withCredentials: true })
+                    .json({ message: "Login Success", status: true, token: token, user: user})
+                                                 
                 } else {
                     return res.json({
                         message: "Incorrect Password",
