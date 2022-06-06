@@ -7,7 +7,7 @@ import { toast, ToastContainer } from "react-toastify";
 
 
 function Secret() {
-  
+
   const nav = useNavigate();
   const [getCookie, removeCookie] = useCookies([]);
 
@@ -17,39 +17,39 @@ function Secret() {
     pauseOnHover: true,
     draggable: true,
     theme: "dark",
-};
-
-useEffect(() => {
-  const verifyUserCookie = async () => {
-    
-    if(!getCookie.jwt) {
-      nav("/chatroom");
-    }  
-
-    else {
-    const { data } = await axios.post("http://localhost:8080/", {}, { withCredentials: true });
-
-    if(data.status === false) {
-      removeCookie("jwt");
-      nav("/login");
-    };
-
-    if (data.status === true) {
-      toast.success(`Hey ${data.user}, welcome to the Secret Page`, toastOptions);
-    };
-  }
   };
 
-verifyUserCookie();
-}, [getCookie, nav, removeCookie]);
+  useEffect(() => {
+    const verifyUserCookie = async () => {
 
-const Logout = () => {
-  removeCookie("jwt");
-  nav("/login")
-};
+      if (!getCookie.jwt) {
+        nav("/login");
+      }
 
-return (
-  <>
+      else {
+        const { data } = await axios.post("http://localhost:8080/", {}, { withCredentials: true });
+
+        if (data.status === false) {
+          removeCookie("jwt");
+          nav("/login");
+        };
+
+        if (data.status === true) {
+          toast.success(`Hey ${data.user}, welcome to the Secret Page`, toastOptions);
+        };
+      }
+    };
+
+    verifyUserCookie();
+  }, [getCookie, nav, removeCookie]);
+
+  const Logout = () => {
+    removeCookie("jwt");
+    nav("/login");
+  };
+
+  return (
+    <>
       <div className="private">
         <h1>Super Secret Page</h1>
         <button onClick={Logout}>Log out</button>
@@ -59,4 +59,4 @@ return (
   );
 };
 
-export default Secret
+export default Secret;
