@@ -10,10 +10,8 @@ import { useCookies } from "react-cookie";
 function Login() {
 
     const navigate = useNavigate();
-<<<<<<< HEAD
-=======
     const [getCookie, removeCookie] = useCookies([]);
->>>>>>> 3345d0437e832f8cf34d46d63403eea1bbd4dcdd
+
 
     const toastOptions = {
         position: "bottom-right",

@@ -19,28 +19,6 @@ function Secret() {
     theme: "dark",
 };
 
-useEffect(() => {
-  const verifyUserCookie = async () => {
-    
-    if(!getCookie.jwt) {
-      nav("/login");
-    }  
-
-    else {
-    const { data } = await axios.post("http://localhost:8080/", {}, { withCredentials: true });
-    console.log(data)
-
-    if(data.status === false) {
-      removeCookie("jwt");
-      nav("/login");
-    };
-
-    if (data.status === true) {
-      toast.success(`Hey ${data.user.username}, welcome to the Secret Page`, toastOptions);
-    };
-  }
-  };
-
   useEffect(() => {
     const verifyUserCookie = async () => {
 
