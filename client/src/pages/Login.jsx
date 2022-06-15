@@ -3,13 +3,14 @@ import { Link, useNavigate } from 'react-router-dom';
 import styled from "styled-components";
 import { ToastContainer, toast } from "react-toastify";
 import axios from "axios"
+
 import { loginRoute } from '../utilities/APIRoutes';
 
 
 function Login() {
     
     const navigate = useNavigate();
-    
+
     const toastOptions = {
         position: "bottom-right",
         autoClose: 8000,
@@ -22,6 +23,12 @@ function Login() {
         username: "",
         password: ""
     });
+
+    useEffect(() => {
+        if (localStorage.getItem(process.env.JWT_KEY)) {
+            navigate("/chatroom");
+        }
+    }, [])
 
     const handleChange = (event) => {
         setValues({ ...values, [event.target.name]: event.target.value },{withCredentials:true})
@@ -50,17 +57,25 @@ function Login() {
             const { data } = await axios.post(loginRoute, {
                 username,
                 password,
-            }, {withCredentials: true});
+                headers: {
+                    'Content-Type': 'application/json'
+                },
+                
+            }, { withCredentials: true });
 
             if (data.status === false) {
                toast.error(data.message, toastOptions )
             }
 
             if (data.status === true) {
-                navigate("/");
+
+                localStorage.setItem("loggedInUser", JSON.stringify(data.user));
+
+                // navigate("/");
+                console.log("This is the userRoute response: ", data);
                 console.log("Print out data.token: ", data.token);
-                console.log("This ios userRoute response: ", data);
-                console.log("Print out user in data.token: ", data.user);
+                console.log("Print out user in data.user: ", data.user);
+                
             }
             
         }

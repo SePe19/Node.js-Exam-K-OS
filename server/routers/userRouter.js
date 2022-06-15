@@ -8,7 +8,6 @@ import jwt from "jsonwebtoken";
 const router = Router();
 
 
-const maxAge = 3*24*60*60;
 
 
 router.post("/register", (req, res) => {
@@ -51,6 +50,7 @@ router.post("/register", (req, res) => {
 });
 
 router.post("/login",  (req, res, next) => {
+
     User.find({ username: req.body.username })
         .exec()
         .then(user => {
@@ -64,11 +64,11 @@ router.post("/login",  (req, res, next) => {
                 if (result) {
                     
                     const token = jwt.sign({
-                        user: user,
+                        user: user, 
                     }, 
                         process.env.JWT_KEY,
                     {
-                        expiresIn: "10s",
+                        expiresIn: "10m",
                     }
                     );
                 
@@ -77,6 +77,8 @@ router.post("/login",  (req, res, next) => {
                         
                     res.cookie("jwt", token, { httpOnly: false, withCredentials: true })
                     .json({ message: "Login Success", status: true, token: token, user: user})
+
+
                                                  
                 } else {
                     return res.json({
@@ -93,5 +95,24 @@ router.post("/login",  (req, res, next) => {
             });
         });
 });
+
+router.get("/allUsers/:id", async (req, res) => {
+    try {
+        //This method finds all users find() except the id on the user that is currently logged in $ne: _id
+        const users = await User.find({_id: {$ne: req.params.id } }).select([
+            "username",
+            "avatarImage",
+            "_id"
+        ]);
+
+        return res.json(users);
+
+    } catch (error) {
+        res.json({message: "Something went wrong fetching all users"});
+        next(error);
+    }
+});
+
+
 
 export default router;

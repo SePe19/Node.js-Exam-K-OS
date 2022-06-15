@@ -10,8 +10,8 @@ import User from "../database/createUserSchema.js";
             console.log("What is inside middleWare token? ", token);
             
             if (error) {
-                res.json({ message: "First false res: ", status: false })
-                next();
+                return res.json({ message: "First false res: ", status: false })
+                
             
             } else {
                 
@@ -20,20 +20,17 @@ import User from "../database/createUserSchema.js";
                 const user = await User.findById(decodedToken.user);
                 console.log("This is the user after decodedToken: ", user);
                 
-                if (user) {
+                
                     console.log("Middleware decoded user: ", user);
-                    res.json({ status: true, user: user.username });
-                    
-                } else {
-                    res.json({ message: "This is second false res: ", status: false })
+                    res.json({ status: true, user: user });
                     next();
-                }
+                
             }
         })
 
     } else {
-        res.json({ message: "This is the final false res: ", status: false })
-        next();
+        return res.json({ message: "This is the final false res: ", status: false })
+        
     }
 
 

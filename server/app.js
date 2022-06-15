@@ -55,6 +55,9 @@ app.use("/auth", userRouter);
 import checkUser from "./middleware/authMiddleware.js"
 app.post("/", checkUser);
 
+import setAvatarRouter from "./routers/setAvatarRouter.js";
+app.use("/auth", setAvatarRouter);
+
 server.listen(8080, () => {
     console.log("Server Running")
 });
