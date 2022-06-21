@@ -137,7 +137,8 @@ const Container = styled.div`
   .current-user {
     background-color: #008000;
     display: flex;
-    justify-content: center;
+    padding-left: 6%;
+    justify-content: left;
     align-items: center;
     gap: 2rem;
     .avatar {
