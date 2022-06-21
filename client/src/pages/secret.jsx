@@ -45,6 +45,7 @@ verifyUserCookie();
 
 const Logout = () => {
   removeCookie("jwt");
+  localStorage.clear();
   nav("/login")
 };
 

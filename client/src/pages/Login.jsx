@@ -71,7 +71,7 @@ function Login() {
 
                 localStorage.setItem("loggedInUser", JSON.stringify(data.user));
 
-                // navigate("/");
+                navigate("/Chat");
                 console.log("This is the userRoute response: ", data);
                 console.log("Print out data.token: ", data.token);
                 console.log("Print out user in data.user: ", data.user);

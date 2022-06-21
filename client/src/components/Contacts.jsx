@@ -63,7 +63,7 @@ function Contacts({ contacts, currentUser, changeChat }) {
           </div>
           <div className="current-user">
             <div className='avatar'>
-              <img src={`${currentUserImage}`} alt="avatar" ></img>
+              <a href="/profilePicture"><img src={`${currentUserImage}`} alt="avatar" ></img></a>
             </div>
             <div className="username">
               <h2>{currentUserName}</h2>

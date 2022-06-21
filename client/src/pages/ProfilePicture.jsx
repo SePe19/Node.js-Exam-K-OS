@@ -57,6 +57,8 @@ const setProfilePicture = async () => {
       localStorage.setItem("loggedInUser", JSON.stringify(user));
 
       toast.success("Profile Picture changed");
+
+      navigate("/Chat");
     }
   }
 };
@@ -115,7 +117,7 @@ const Container = styled.div`
     .avatar {
       border: 0.4rem solid transparent;
       padding: 0.4rem;
-      border-radius: 5rem;
+      border-radius: 1rem;
       display: flex;
       justify-content: center;
       align-items: center;

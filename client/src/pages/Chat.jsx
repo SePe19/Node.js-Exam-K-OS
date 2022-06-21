@@ -58,10 +58,9 @@ function Chat() {
           .then(response => response.json())
           .then(data => setContacts(data))
 
-        toast.success("Select a user to start chatting", toastOptions);
 
       } catch (error) {
-        toast.error("Unable to fetchAllContacts: ", error);
+        console.log(error);
       }
     };
     fetchAllContacts();
