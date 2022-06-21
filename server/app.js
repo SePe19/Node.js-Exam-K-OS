@@ -8,7 +8,7 @@ import cookieParser from "cookie-parser"
 app.use(cookieParser());
 
 import cors from "cors";
-app.use(cors({credentials: true, origin: "http://localhost:3000"}));
+app.use(cors({ credentials: true, origin: "http://localhost:3000" }));
 
 import http from "http";
 const server = http.createServer(app);
@@ -19,25 +19,34 @@ const io = new Server(server, {
         origin: "http://localhost:3000",
         methods: ["GET", "POST", "PUT", "DELETE"],
         credentials: true,
-        
     }
 });
 
-io.on("connect", (socket) => {
+global.onlineUsers = new Map();
+
+io.on("connection", (socket) => {
     console.log("User Connected: ", socket.id);
 
-    socket.on("join_chatroom", (data) => {
-        socket.join(data);
-        console.log("User with id: ", socket.id, " joined the chatroom", data);
+    global.chatSocket = socket;
+    socket.on("add-user", (userId) => {
+        onlineUsers.set(userId, socket.id);
     });
 
-    socket.on("send_message", (data) => {
-        socket.to(data.chatroom).emit("receive_message",data)
+    socket.on("send-message", (data) => {
+        const sendUserSocket = onlineUsers.get(data.to);
+        if (sendUserSocket) {
+            socket.to(sendUserSocket).emit("receive-message", data.message);
+        }
     });
 
-    socket.on("disconnect", () => {
-        console.log("User Disconnected: ", socket.id);
-    });
+    // socket.on("join_chatroom", (data) => {
+    //     socket.join(data);
+    //     console.log("User with id: ", socket.id, " joined the chatroom", data);
+    // });
+
+    // socket.on("disconnect", () => {
+    //     console.log("User Disconnected: ", socket.id);
+    // });
 });
 
 
@@ -57,6 +66,9 @@ app.post("/", checkUser);
 
 import setAvatarRouter from "./routers/setAvatarRouter.js";
 app.use("/auth", setAvatarRouter);
+
+import messageRouter from "./routers/messageRouter.js";
+app.use("/auth", messageRouter);
 
 server.listen(8080, () => {
     console.log("Server Running")

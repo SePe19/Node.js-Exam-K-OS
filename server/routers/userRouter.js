@@ -51,7 +51,7 @@ router.post("/register", (req, res) => {
 
 router.post("/login",  (req, res, next) => {
 
-    User.find({ username: req.body.username })
+    User.findOne({ username: req.body.username })
         .exec()
         .then(user => {
             if (user.length < 1) {
@@ -60,7 +60,7 @@ router.post("/login",  (req, res, next) => {
                     message: "Username not found. Unable to Login"
                 });
             }
-            bcrypt.compare(req.body.password, user[0].password, (error, result) => {
+            bcrypt.compare(req.body.password, user.password, (error, result) => {
                 if (result) {
                     
                     const token = jwt.sign({
@@ -96,7 +96,7 @@ router.post("/login",  (req, res, next) => {
         });
 });
 
-router.get("/allUsers/:id", async (req, res) => {
+router.get("/allUsers/:id", async (req, res, next ) => {
     try {
         //This method finds all users find() except the id on the user that is currently logged in $ne: _id
         const users = await User.find({_id: {$ne: req.params.id } }).select([

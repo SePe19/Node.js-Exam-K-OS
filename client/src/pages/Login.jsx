@@ -5,13 +5,11 @@ import { ToastContainer, toast } from "react-toastify";
 import axios from "axios"
 
 import { loginRoute } from '../utilities/APIRoutes';
-import { useCookies } from "react-cookie";
+
 
 function Login() {
-
+    
     const navigate = useNavigate();
-    const [getCookie, removeCookie] = useCookies([]);
-
 
     const toastOptions = {
         position: "bottom-right",
@@ -33,7 +31,7 @@ function Login() {
     }, [])
 
     const handleChange = (event) => {
-        setValues({ ...values, [event.target.name]: event.target.value }, { withCredentials: true })
+        setValues({ ...values, [event.target.name]: event.target.value },{withCredentials:true})
     };
 
     const handleValidation = () => {
@@ -53,10 +51,7 @@ function Login() {
     const handleSubmit = async (event) => {
         // preventDefault, hvad er det?
         event.preventDefault();
-        if (!getCookie.jwt) {
-            toast.error("Not authorized ", toastOptions);
-            navigate("/login");
-        }
+
         if (handleValidation()) {
             const { username, password } = values;
             const { data } = await axios.post(loginRoute, {
@@ -69,7 +64,7 @@ function Login() {
             }, { withCredentials: true });
 
             if (data.status === false) {
-                toast.error(data.message, toastOptions)
+               toast.error(data.message, toastOptions )
             }
 
             if (data.status === true) {
@@ -82,11 +77,11 @@ function Login() {
                 console.log("Print out user in data.user: ", data.user);
                 
             }
-
+            
         }
     };
-
-
+        
+    
     return (
         <>
             <FormContainer>
@@ -97,7 +92,7 @@ function Login() {
                     <input type="text" placeholder="Username" name="username" min="3" onChange={(e) => handleChange(e)} />
                     <input type="password" placeholder="Password" name="password" min="5" onChange={(e) => handleChange(e)} />
                     <button type='submit'> Login </button>
-                    <span> Not a User? <Link to="/register"> Register </Link></span>
+                    <span> Not a User? <Link to="/register"> Register </Link></span> 
                 </form>
             </FormContainer>
             <ToastContainer />

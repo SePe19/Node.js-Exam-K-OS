@@ -1,4 +1,3 @@
-// 1. Import *useState* and *useEffect*
 import axios from 'axios';
 import styled from "styled-components";
 import React, {useState, useEffect} from 'react';
@@ -26,9 +25,12 @@ function ProfilePicture() {
 };
 
 useEffect(() => {
+  const verifyUserCookie = async () => {
   if(!getCookie.jwt) {
     navigate("/login");
   }  
+}
+  verifyUserCookie();
 }, []);
 
 const setProfilePicture = async () => {
@@ -41,7 +43,7 @@ const setProfilePicture = async () => {
     const user = await JSON.parse(localStorage.getItem("loggedInUser"));
     console.log("This is in profile picture user localstorage: ", user);
 
-    const { data } = await axios.post(`${setAvatarRoute}/${user[0]._id}`, { image: dogImage[selectedImage] }, { withCredentials: true });
+    const { data } = await axios.post(`${setAvatarRoute}/${user._id}`, { image: dogImage[selectedImage] }, { withCredentials: true });
     console.log("setAvatarRoute axios data: ", data);
 
     if(data.status == false) {
