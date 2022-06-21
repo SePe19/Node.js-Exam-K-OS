@@ -12,13 +12,13 @@ router.post("/getMessages", async (req, res, next) => {
                 $all: [from, to]
             },
         }).sort({ updatedAt: 1 });
-        const recievedMessages = messages.map((message) => {
+        const receivedMessages = messages.map((message) => {
             return {
                 fromSelf: message.sender.toString() === from,
                 message: message.message.text
             };
         });
-        return res.json(recievedMessages);
+        return res.json(receivedMessages);
 
     } catch (exception) {
         next(exception);

@@ -11,7 +11,6 @@ function Messages() {
 const Container = styled.div`
   display: grid;
   grid-template-rows: 10% 80% 10%;
-  gap: 0.1rem;
   overflow: hidden;
   @media screen and (min-width: 720px) and (max-width: 1080px) {
     grid-template-rows: 15% 70% 15%;
@@ -66,13 +65,13 @@ const Container = styled.div`
         }
       }
     }
-    .sended {
+    .sent {
       justify-content: flex-end;
       .content {
-        background-color: #4f04ff21;
+        background-color: #FFFFFF;
       }
     }
-    .recieved {
+    .received {
       justify-content: flex-start;
       .content {
         background-color: #9900ff20;

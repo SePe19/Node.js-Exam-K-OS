@@ -18,10 +18,8 @@ function Contacts({ contacts, currentUser, changeChat }) {
   useEffect(() => {
     async function setCurrentUserDetail() {
       if (currentUser) {
-
         setCurrentUserImage(currentUser.avatarImage);
         setCurrentUserName(currentUser.username);
-
       }
     }
     setCurrentUserDetail();
@@ -35,9 +33,9 @@ function Contacts({ contacts, currentUser, changeChat }) {
   return (
     <>
       {currentUserImage && currentUserName && (
-        <Container>
-          <div className='brand'>
-            <img src={""} alt="logo" />
+        <Container className="contact-column">
+          <div className="brand">
+            <img src={"https://img.icons8.com/arcade/64/000000/experimental-chat-arcade.png"} alt="logo" />
             <h3>ChatLand</h3>
           </div>
           <div className="contacts">
@@ -49,7 +47,7 @@ function Contacts({ contacts, currentUser, changeChat }) {
                     key={index}
                     onClick={() => changeCurrentChat(index, contact)}
                   >
-                    <div className='avatar'>
+                    <div className="avatar">
                       <img src={`${contact.avatarImage}`}
                         alt="avatar" >
                       </img>
@@ -60,7 +58,7 @@ function Contacts({ contacts, currentUser, changeChat }) {
                   </div>
 
                 );
-              })) : (toast.error("Unable to render contacts, refresh please!"))};
+              })) : (toast.error("Unable to render contacts, refresh please!"))}
 
           </div>
           <div className="current-user">
@@ -80,9 +78,9 @@ function Contacts({ contacts, currentUser, changeChat }) {
 }
 const Container = styled.div`
   display: grid;
-  grid-template-rows: 10% 75% 15%;
+  grid-template-rows: 15% 70% 15%;
   overflow: hidden;
-  background-color: #080420;
+  background-color: #006400;
   .brand {
     display: flex;
     align-items: center;
@@ -102,19 +100,19 @@ const Container = styled.div`
     align-items: center;
     overflow: auto;
     gap: 0.8rem;
+    padding 5px;
     &::-webkit-scrollbar {
-      width: 0.2rem;
+      width: 0.1rem;
       &-thumb {
-        background-color: #ffffff39;
-        width: 0.1rem;
+        background-color: dark-green;
         border-radius: 1rem;
       }
     }
     .contact {
-      background-color: #ffffff34;
+      background-color: green;
       min-height: 5rem;
       cursor: pointer;
-      width: 90%;
+      width: 85%;
       border-radius: 0.2rem;
       padding: 0.4rem;
       display: flex;
@@ -133,11 +131,11 @@ const Container = styled.div`
       }
     }
     .selected {
-      background-color: #9a86f3;
+      background-color: #55a630;
     }
   }
   .current-user {
-    background-color: #0d0d30;
+    background-color: #008000;
     display: flex;
     justify-content: center;
     align-items: center;
@@ -162,7 +160,8 @@ const Container = styled.div`
       }
     }
   }
-`;
-
-
-export default Contacts
+  `;
+  
+  
+  export default Contacts
+  

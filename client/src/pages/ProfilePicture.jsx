@@ -41,10 +41,8 @@ const setProfilePicture = async () => {
 
   else {
     const user = await JSON.parse(localStorage.getItem("loggedInUser"));
-    console.log("This is in profile picture user localstorage: ", user);
 
     const { data } = await axios.post(`${setAvatarRoute}/${user._id}`, { image: dogImage[selectedImage] }, { withCredentials: true });
-    console.log("setAvatarRoute axios data: ", data);
 
     if(data.status == false) {
       removeCookie("jwt");
@@ -57,8 +55,6 @@ const setProfilePicture = async () => {
       user.avatarImage = data.image;
 
       localStorage.setItem("loggedInUser", JSON.stringify(user));
-      console.log("This is the new user after avatar: ", user);
-      console.log("This is image data: ", data.image);
 
       toast.success("Profile Picture changed");
     }

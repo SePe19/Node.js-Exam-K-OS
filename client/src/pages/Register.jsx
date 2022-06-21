@@ -33,14 +33,11 @@ function Register() {
         if (username.length < 3) {
             toast.error("Username must be atleast 3 characters long", toastOptions);
             return false;
-
         } else if (password.length < 5) {
             toast.error("Password must be atleast 5 characters long", toastOptions);
             return false;
         }
-
         return true;
-
     };
 
     const handleSubmit = async (event) => {
@@ -59,11 +56,8 @@ function Register() {
             }
 
             if (data.status === true) {
-                               
-
                 navigate("/login") 
             }
-            
         }
     };
 

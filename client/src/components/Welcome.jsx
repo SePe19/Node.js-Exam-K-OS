@@ -1,21 +1,20 @@
 import React from 'react'
 import styled from 'styled-components'
 
-export default function Welcome({currentUser}) {
-  
+export default function Welcome({ currentUser }) {
+
   return (
     <Container>
-        <img src="" alt="" />
-        <h1>
-            welcome,  <span>{currentUser.username} </span>
-
-            
-        </h1>
-        <h3>Please select a chat to begin</h3>
+      <img src="https://media.giphy.com/media/gi9umgLPuGxfJ4CfMo/giphy.gif"/>
+      <h1>
+        Welcome, <span>{currentUser.username}</span>
+      </h1>
+      <h3>Please select a chat to begin</h3>
     </Container>
   )
 }
-const Container = styled.div` 
+const Container = styled.div`
+background-color: #006400;
 display: flex;
 justify-content: center;
 align-items: center;
@@ -25,5 +24,5 @@ img {
   height: 20rem;
 }
 span {
-  color: #4e0eff;
+  color: #00ff00;
 }`;

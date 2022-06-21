@@ -24,11 +24,10 @@ function ChatInput({handleSendMessage}) {
     if(message.length > 0 ) {
       handleSendMessage(message);
       setMessage("");
-      console.log(message);
     }
   }
   return (
-    <Container>
+    <Container className="chatinput-container">
         <div className="button-container">
         <div className="emoji">
           <BsEmojiSmileFill onClick={handleEmojiPickerHideShow}  />
@@ -36,7 +35,7 @@ function ChatInput({handleSendMessage}) {
         </div>
       </div>
         <form className="input-container" onSubmit={(event) => sendChat(event)}>
-        <input type="text" placeholder="Type Message Here" value={message} onChange={(event) => setMessage(event.target.value)} />
+        <input className="input-placeholder" type="text" placeholder="Type Message Here" value={message} onChange={(event) => setMessage(event.target.value)} />
         <button className="submit">
             <IoMdSend />
         </button>
@@ -49,7 +48,7 @@ const Container = styled.div`
   display: grid;
   align-items: center;
   grid-template-columns: 5% 95%;
-  background-color: #080420;
+  background-color: #006400;
   padding: 0 2rem;
   @media screen and (min-width: 720px) and (max-width: 1080px) {
     padding: 0 1rem;
@@ -64,7 +63,7 @@ const Container = styled.div`
       position: relative;
       svg {
         font-size: 1.5rem;
-        color: #ffff00c8;
+        color: yellow;
         cursor: pointer;
       }
       .emoji-picker-react {
@@ -102,7 +101,7 @@ const Container = styled.div`
     align-items: center;
     gap: 2rem;
     background-color: #ffffff34;
-    input {
+    .input-placeholder {
       width: 90%;
       height: 60%;
       background-color: transparent;
@@ -116,6 +115,10 @@ const Container = styled.div`
       &:focus {
         outline: none;
       }
+      &::placeholder {
+        color: #ffffff;
+        opacity: 0.75;
+      }
     }
     button {
       padding: 0.3rem 2rem;
@@ -123,7 +126,7 @@ const Container = styled.div`
       display: flex;
       justify-content: center;
       align-items: center;
-      background-color: #9a86f3;
+      background-color: #329a33;
       border: none;
       @media screen and (min-width: 720px) and (max-width: 1080px) {
         padding: 0.3rem 1rem;
@@ -133,7 +136,7 @@ const Container = styled.div`
       }
       svg {
         font-size: 2rem;
-        color: white;
+        color: black;
       }
     }
   }

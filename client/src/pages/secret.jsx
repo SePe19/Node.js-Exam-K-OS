@@ -28,7 +28,6 @@ useEffect(() => {
 
     else {
     const { data } = await axios.post("http://localhost:8080/", {}, { withCredentials: true });
-    console.log(data)
 
     if(data.status === false) {
       removeCookie("jwt");

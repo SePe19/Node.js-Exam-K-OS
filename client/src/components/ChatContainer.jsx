@@ -87,7 +87,7 @@ function ChatContainer({ currentChat, currentUser, socket }) {
           messages.map((message) => {
             return (
               <div ref={scrollRef} key={uuidv4()}>
-                <div className={`message ${message.fromSelf ? "sended" : "recieved"} `}>
+                <div className={`message ${message.fromSelf ? "sent" : "received"} `}>
                   <div className="content">
                     <p>
                       {message.message}
@@ -109,13 +109,13 @@ function ChatContainer({ currentChat, currentUser, socket }) {
 
 const Container = styled.div`
   display: grid;
-  grid-template-rows: 10% 80% 10%;
-  gap: 0.1rem;
+  grid-template-rows: 15% 70% 15%;
   overflow: hidden;
   @media screen and (min-width: 720px) and (max-width: 1080px) {
     grid-template-rows: 15% 70% 15%;
   }
   .chat-header {
+    background-color: green;
     display: flex;
     justify-content: space-between;
     align-items: center;
@@ -141,6 +141,7 @@ const Container = styled.div`
     display: flex;
     flex-direction: column;
     gap: 1rem;
+    background-color: #006400;
     overflow: auto;
     &::-webkit-scrollbar {
       width: 0.2rem;
@@ -159,19 +160,19 @@ const Container = styled.div`
         padding: 1rem;
         font-size: 1.1rem;
         border-radius: 1rem;
-        color: #d1d1d1;
+        color: #FFFFFF;
         @media screen and (min-width: 720px) and (max-width: 1080px) {
           max-width: 70%;
         }
       }
     }
-    .sended {
+    .sent {
       justify-content: flex-end;
       .content {
         background-color: #4f04ff21;
       }
     }
-    .recieved {
+    .received {
       justify-content: flex-start;
       .content {
         background-color: #9900ff20;

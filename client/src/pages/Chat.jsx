@@ -41,7 +41,7 @@ function Chat() {
     }
     verifyUserCookie();
   }, [getCookie, navigate]);
-  
+
   useEffect(() => {
     if (currentUser) {
       socket.current = io(baseURL);
@@ -61,7 +61,7 @@ function Chat() {
         toast.success("Select a user to start chatting", toastOptions);
 
       } catch (error) {
-        console.log("Unable to fetchAllContacts: ", error);
+        toast.error("Unable to fetchAllContacts: ", error);
       }
     };
     fetchAllContacts();
@@ -72,25 +72,26 @@ function Chat() {
     setCurrentChat(chat);
   }
 
-  return (<Container>
-    <div className="container">
-      <Contacts
-        contacts={contacts}
-        currentUser={currentUser}
-        changeChat={handleChatChange}
-      />
-      {isLoaded && currentChat === undefined ? (
-        <Welcome currentUser={currentUser} />
-      ) : (
-        <ChatContainer 
-        currentChat={currentChat} 
-        currentUser={currentUser} 
-        socket={socket} 
+  return (
+    <Container>
+      <div className="container">
+        <Contacts
+          contacts={contacts}
+          currentUser={currentUser}
+          changeChat={handleChatChange}
         />
-      )}
-    </div>
-    <ToastContainer />
-  </Container>
+        {isLoaded && currentChat === undefined ? (
+          <Welcome currentUser={currentUser} />
+        ) : (
+          <ChatContainer
+            currentChat={currentChat}
+            currentUser={currentUser}
+            socket={socket}
+          />
+        )}
+      </div>
+      <ToastContainer />
+    </Container>
   )
 }
 
@@ -100,18 +101,38 @@ width: 100vw;
 display: flex;
 flex-direction: column;
 justify-content: center;
-gap: 1rem;
 align-items: center;
-background-color: #131324;
 .container {
-  height: 85vh;
-  width: 85vw;
+  height: 100vh;
+  width: 100vw;
   background-color: #00000076;
   display: grid;
   grid-template-columns: 25% 75%;
   @media screen and (min-width: 720px) and (max-width: 1080px) {
     grid-template-columns: 35% 65%;
   }
+}
+.contact-column {
+  border-right: solid black 1px;
+}
+.brand {
+  border-bottom: solid black 1px;
+}
+.current-user {
+  border-top: solid black 1px;
+}
+.chat-header {
+  border-bottom: solid black 1px;
+}
+.chatinput-container {
+  border-top: solid black 1px;
+  background-color: #008000
+}
+.chat-messages .sent .content {
+  background-color: #55a630;
+}
+.chat-messages .received .content {
+  background-color: #1e7988;
 }
 `;
 
