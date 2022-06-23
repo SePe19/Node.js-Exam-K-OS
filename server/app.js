@@ -4,7 +4,7 @@ import express from "express";
 const app = express();
 app.use(express.json());
 
-import cookieParser from "cookie-parser"
+import cookieParser from "cookie-parser";
 app.use(cookieParser());
 
 import cors from "cors";
@@ -39,14 +39,6 @@ io.on("connection", (socket) => {
         }
     });
 
-    // socket.on("join_chatroom", (data) => {
-    //     socket.join(data);
-    //     console.log("User with id: ", socket.id, " joined the chatroom", data);
-    // });
-
-    // socket.on("disconnect", () => {
-    //     console.log("User Disconnected: ", socket.id);
-    // });
 });
 
 
@@ -61,7 +53,7 @@ mongoose.connect("mongodb://localhost:27017/chatland", {
 import userRouter from "./routers/userRouter.js";
 app.use("/auth", userRouter);
 
-import checkUser from "./middleware/authMiddleware.js"
+import checkUser from "./middleware/authMiddleware.js";
 app.post("/", checkUser);
 
 import setAvatarRouter from "./routers/setAvatarRouter.js";
@@ -71,5 +63,5 @@ import messageRouter from "./routers/messageRouter.js";
 app.use("/auth", messageRouter);
 
 server.listen(8080, () => {
-    console.log("Server Running")
+    console.log("Server Running");
 });

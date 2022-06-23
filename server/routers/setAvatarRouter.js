@@ -1,10 +1,9 @@
 import { Router } from "express";
 import User from "../database/createUserSchema.js";
-import checkUser from "../middleware/authMiddleware.js";
 
 const router = Router();
 
-router.post ("/setAvatar/:id", async (req, res, next) => {
+router.post ("/setAvatar/:id", async (req, res) => {
     
       const userId = req.params.id;
       const avatarImage = req.body.image;

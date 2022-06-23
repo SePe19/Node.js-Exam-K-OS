@@ -1,6 +1,6 @@
-import React, { useState, useEffect } from 'react';
-import { toast } from 'react-toastify';
-import styled from 'styled-components';
+import React, { useState, useEffect } from "react";
+import { toast } from "react-toastify";
+import styled from "styled-components";
 
 function Contacts({ contacts, currentUser, changeChat }) {
   const [currentUserName, setCurrentUserName] = useState();
@@ -58,18 +58,17 @@ function Contacts({ contacts, currentUser, changeChat }) {
                   </div>
 
                 );
-              })) : (toast.error("Unable to render contacts, refresh please!"))}
+              })) : (console.log("Unable to render contacts, refresh please!"))}
 
           </div>
           <div className="current-user">
-            <div className='avatar'>
+            <div className="avatar">
               <a href="/profilePicture"><img src={`${currentUserImage}`} alt="avatar" ></img></a>
             </div>
             <div className="username">
               <h2>{currentUserName}</h2>
             </div>
           </div>
-
         </Container>
       )
       }
@@ -163,6 +162,5 @@ const Container = styled.div`
   }
   `;
   
-  
-  export default Contacts
+  export default Contacts;
   

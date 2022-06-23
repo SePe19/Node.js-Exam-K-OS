@@ -60,4 +60,4 @@ return (
   );
 };
 
-export default Secret
+export default Secret;

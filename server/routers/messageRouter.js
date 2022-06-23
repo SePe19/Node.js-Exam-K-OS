@@ -36,8 +36,6 @@ router.post("/addMessage", async (req, res, next) => {
             sender: from
         });
 
-        console.log()
-
         if (data) {
             return res.json({ message: "Message sent to Database", status: true });
         }
@@ -47,7 +45,7 @@ router.post("/addMessage", async (req, res, next) => {
         }
 
     } catch (exception) {
-        next(exception)
+        next(exception);
 
     }
 });

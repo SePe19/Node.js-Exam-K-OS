@@ -1,10 +1,10 @@
-import React, { useEffect, useState, useRef } from 'react'
-import styled from 'styled-components';
-import ChatInput from './ChatInput';
-import Logout from './Logout';
-import { toast } from 'react-toastify';
+import React, { useEffect, useState, useRef } from "react";
+import styled from "styled-components";
+import ChatInput from "./ChatInput";
+import Logout from "./Logout";
+import { toast } from "react-toastify";
 import { addMessage, getMessage } from "../utilities/APIRoutes";
-import axios from 'axios';
+import axios from "axios";
 import {v4 as uuidv4} from "uuid";
 
 function ChatContainer({ currentChat, currentUser, socket }) {
@@ -71,7 +71,7 @@ function ChatContainer({ currentChat, currentUser, socket }) {
         <div className="user-details">
 
           <div className="avatar">
-            <img src={`${currentChat.avatarImage}`} alt="avatar" />
+            <img src={`${currentChat.avatarImage}`} alt="avatar"/>
           </div>
 
           <div className="username">
@@ -80,10 +80,10 @@ function ChatContainer({ currentChat, currentUser, socket }) {
 
 
         </div>
-        <Logout />
+        <Logout/>
       </div>
       <div className="chat-messages">
-        {Array.isArray(messages) ? (// && messages && messages.map() ? (
+        {Array.isArray(messages) ? (
           messages.map((message) => {
             return (
               <div ref={scrollRef} key={uuidv4()}>
@@ -103,7 +103,6 @@ function ChatContainer({ currentChat, currentUser, socket }) {
   )}
   </>
   );
-
 }
 
 
@@ -181,4 +180,4 @@ const Container = styled.div`
   }
 `;
 
-export default ChatContainer
+export default ChatContainer;

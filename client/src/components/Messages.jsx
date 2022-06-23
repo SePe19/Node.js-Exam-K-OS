@@ -1,4 +1,4 @@
-import React from 'react'
+import React from "react";
 import styled from "styled-components";
 
 
@@ -80,4 +80,4 @@ const Container = styled.div`
   }
 `;
 
-export default Messages
+export default Messages;

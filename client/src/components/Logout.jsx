@@ -1,8 +1,7 @@
-import React from 'react'
-import { useNavigate } from 'react-router-dom';
+import React from "react";
+import { useNavigate } from "react-router-dom";
 import { BiPowerOff } from "react-icons/bi";
-import styled from 'styled-components';
-import axios from 'axios';
+import styled from "styled-components";
 import { useCookies } from "react-cookie";
 
 

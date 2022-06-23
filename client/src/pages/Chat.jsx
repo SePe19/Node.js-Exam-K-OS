@@ -1,11 +1,11 @@
 import React, { useState, useEffect, useRef } from "react";
 import styled from "styled-components";
-import { useNavigate } from 'react-router-dom';
+import { useNavigate } from "react-router-dom";
 import { allUsers, baseURL } from "../utilities/APIRoutes";
 import { useCookies } from "react-cookie";
 import Contacts from "../components/Contacts";
 import Welcome from "../components/Welcome";
-import { ToastContainer, toast } from "react-toastify";
+import { ToastContainer, Toast} from "react-toastify";
 import ChatContainer from "../components/ChatContainer";
 import io from "socket.io-client";
 
@@ -51,12 +51,10 @@ function Chat() {
 
   useEffect(() => {
     const fetchAllContacts = async () => {
-
       try {
-
-        fetch(`${allUsers}/${currentUser._id}`)
+         const data = await fetch(`${allUsers}/${currentUser._id}`)
           .then(response => response.json())
-          .then(data => setContacts(data))
+          .then(data => setContacts(data));
 
 
       } catch (error) {
@@ -135,4 +133,4 @@ align-items: center;
 }
 `;
 
-export default Chat
+export default Chat;

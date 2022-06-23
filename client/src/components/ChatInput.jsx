@@ -1,4 +1,4 @@
-import React, { useState } from 'react'
+import React, { useState } from "react";
 import styled from "styled-components";
 import Picker from "emoji-picker-react";
 import { BsEmojiSmileFill } from "react-icons/bs";
@@ -142,4 +142,4 @@ const Container = styled.div`
   }
 `;
 
-export default ChatInput
+export default ChatInput;

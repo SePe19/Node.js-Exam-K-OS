@@ -1,10 +1,9 @@
-import React, { useState, useEffect } from 'react'
-import { Link, useNavigate } from 'react-router-dom';
+import React, { useState, useEffect } from "react";
+import { Link, useNavigate } from "react-router-dom";
 import styled from "styled-components";
 import { ToastContainer, toast } from "react-toastify";
 import axios from "axios"
-
-import { loginRoute } from '../utilities/APIRoutes';
+import { loginRoute } from "../utilities/APIRoutes";
 
 
 function Login() {
@@ -58,7 +57,7 @@ function Login() {
                 username,
                 password,
                 headers: {
-                    'Content-Type': 'application/json'
+                    "Content-Type": "application/json"
                 },
                 
             }, { withCredentials: true });
@@ -84,22 +83,66 @@ function Login() {
     
     return (
         <>
+        
             <FormContainer>
-                <form onSubmit={(event) => handleSubmit(event)}>
+            <div className="pagecontainer">
+                <div className="formcontainer">
+                <form  onSubmit={(event) => handleSubmit(event)}>
                     <div className="brand">
-                        <h1>Chatland Login</h1>
+                        <h1 className="title">Chatland Login</h1>
                     </div>
-                    <input type="text" placeholder="Username" name="username" min="3" onChange={(e) => handleChange(e)} />
-                    <input type="password" placeholder="Password" name="password" min="5" onChange={(e) => handleChange(e)} />
-                    <button type='submit'> Login </button>
-                    <span> Not a User? <Link to="/register"> Register </Link></span> 
+                    <div className="logincontainer">
+                    <input className="textinp" type="text" placeholder="Username" name="username" min="3" onChange={(e) => handleChange(e)} />
+                    <br />
+                    <input className="passwordinp" type="password" placeholder="Password" name="password" min="5" onChange={(e) => handleChange(e)} />
+                    <br/>
+                    <button className="submitbtn" type="submit"> Login </button>
+                    </div>
+                    <span className="notauser"> Not a User? <Link to="/register"> Register </Link></span> 
                 </form>
+                </div>
+            </div>
             </FormContainer>
             <ToastContainer />
+            
         </>
     )
 };
 
-const FormContainer = styled.div``;
+const FormContainer = styled.div`
+@import url("https://fonts.googleapis.com/css2?family=EB+Garamond&display=swap");
 
-export default Login
+.pagecontainer {
+    height: 100vh;
+    width: 100vw;
+    background-color: lightgreen;
+
+}
+
+.title{
+    font-size: 40px;
+    font-weight: 600;
+    color: midnightblue;
+    font-family: "EB Garamond", sans-serif;
+}
+
+
+.formcontainer {
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    margin-right: -50%;
+    transform: translate(-50%, -50%);
+
+    .logincontainer{
+        display: flex;
+        flex-direction: column;
+    }
+}
+.notauser{
+    color: midnightblue;
+}
+
+`;
+
+export default Login;

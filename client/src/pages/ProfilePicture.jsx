@@ -1,8 +1,8 @@
-import axios from 'axios';
+import axios from "axios";
 import styled from "styled-components";
-import React, {useState, useEffect} from 'react';
+import React, {useState, useEffect} from "react";
 import { useCookies } from "react-cookie";
-import { useNavigate } from 'react-router-dom';
+import { useNavigate } from "react-router-dom";
 import { ToastContainer, toast } from "react-toastify";
 import { setAvatarRoute } from "../utilities/APIRoutes";
 
@@ -47,7 +47,7 @@ const setProfilePicture = async () => {
     if(data.status == false) {
       removeCookie("jwt");
       navigate("/login");
-      toast.error("Error!")
+      toast.error("Error!");
     }
 
     if(data.status == true) {

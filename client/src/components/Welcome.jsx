@@ -1,7 +1,7 @@
-import React from 'react'
-import styled from 'styled-components'
+import React from "react";
+import styled from "styled-components";
 
-export default function Welcome({ currentUser }) {
+function Welcome({ currentUser }) {
 
   return (
     <Container>
@@ -26,3 +26,5 @@ img {
 span {
   color: #00ff00;
 }`;
+
+export default Welcome;

@@ -29,13 +29,11 @@ router.post("/register", (req, res) => {
                         const user = new User({
                             username: req.body.username,
                             password: hash,
-                           
-
                         });
                         user
                             .save()
                             .then(result => {
-                                res.json ({message: "User Registered",status: true})
+                                res.json({ message: "User Registered", status: true })
                             })
                             .catch(err => {
                                 console.log(err);
@@ -49,7 +47,7 @@ router.post("/register", (req, res) => {
         });
 });
 
-router.post("/login",  (req, res, next) => {
+router.post("/login", (req, res,) => {
 
     User.findOne({ username: req.body.username })
         .exec()
@@ -62,24 +60,22 @@ router.post("/login",  (req, res, next) => {
             }
             bcrypt.compare(req.body.password, user.password, (error, result) => {
                 if (result) {
-                    
+
                     const token = jwt.sign({
-                        user: user, 
-                    }, 
+                        user: user,
+                    },
                         process.env.JWT_KEY,
-                    {
-                        expiresIn: "10m",
-                    }
+                        {
+                            expiresIn: "10m",
+                        }
                     );
-                
+
                     console.log("Our JWT Token: ", token)
                     console.log("Our user data ", user)
-                        
+
                     res.cookie("jwt", token, { httpOnly: false, withCredentials: true })
-                    .json({ message: "Login Success", status: true, token: token, user: user})
+                        .json({ message: "Login Success", status: true, token: token, user: user })
 
-
-                                                 
                 } else {
                     return res.json({
                         message: "Incorrect Password",
@@ -96,10 +92,10 @@ router.post("/login",  (req, res, next) => {
         });
 });
 
-router.get("/allUsers/:id", async (req, res, next ) => {
+router.get("/allUsers/:id", async (req, res, next) => {
     try {
         //This method finds all users find() except the id on the user that is currently logged in $ne: _id
-        const users = await User.find({_id: {$ne: req.params.id } }).select([
+        const users = await User.find({ _id: { $ne: req.params._id } }).select([
             "username",
             "avatarImage",
             "_id"
@@ -108,11 +104,9 @@ router.get("/allUsers/:id", async (req, res, next ) => {
         return res.json(users);
 
     } catch (error) {
-        res.json({message: "Something went wrong fetching all users"});
+        res.json({ message: "Something went wrong fetching all users" });
         next(error);
     }
 });
-
-
 
 export default router;
