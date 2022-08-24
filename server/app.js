@@ -41,14 +41,8 @@ io.on("connection", (socket) => {
 
 });
 
-
-import mongoose from "mongoose";
-mongoose.connect("mongodb://localhost:27017/chatland", {
-    useNewUrlParser: true
-})
-    .then((_) => console.log("Connected to DB"))
-    .catch((err) => console.error("error", err));
-
+import mongooseConnectDB from "./database/dbConnection.js";
+mongooseConnectDB("mongodb://localhost:27017/chatland");
 
 import userRouter from "./routers/userRouter.js";
 app.use("/auth", userRouter);

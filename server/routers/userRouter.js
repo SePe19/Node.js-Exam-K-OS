@@ -3,12 +3,7 @@ import { Router } from "express";
 import User from "../database/createUserSchema.js";
 import jwt from "jsonwebtoken";
 
-
-
 const router = Router();
-
-
-
 
 router.post("/register", (req, res) => {
     User.find({ username: req.body.username })
@@ -95,7 +90,7 @@ router.post("/login", (req, res,) => {
 router.get("/allUsers/:id", async (req, res, next) => {
     try {
         //This method finds all users find() except the id on the user that is currently logged in $ne: _id
-        const users = await User.find({ _id: { $ne: req.params._id } }).select([
+        const users = await User.find({ _id: { $ne: req.params.id } }).select([
             "username",
             "avatarImage",
             "_id"

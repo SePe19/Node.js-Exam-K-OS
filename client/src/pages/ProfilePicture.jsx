@@ -26,8 +26,8 @@ function ProfilePicture() {
 
 useEffect(() => {
   const verifyUserCookie = async () => {
-  if(!getCookie.jwt) {
-    navigate("/login");
+  if(!getCookie.jwt || !localStorage.getItem("loggedInUser")) {
+  navigate("/login");
   }  
 }
   verifyUserCookie();

@@ -11,7 +11,6 @@ function App() {
   return (
     <BrowserRouter>
     <Routes>
-        {/* Hvorfor bruger man element og ikke component? */}
         <Route path="/register" element={<Register />} />
         <Route path="/login" element={<Login />} />
         <Route path="/chat" element={<Chat />} />
